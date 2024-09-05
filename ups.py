@@ -1,5 +1,6 @@
 import os
 import time
+from datetime import datetime
 from email.mime.text import MIMEText
 from smtplib import SMTP_SSL as SMTP
 
@@ -14,7 +15,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 def do_the_thing():
     while True:
         get_ups_status()
-        time.sleep(300)
+        time.sleep(1800)
 
 
 def get_ups_status():
@@ -35,7 +36,8 @@ def get_ups_status():
     send_mail(slots)
 
     if slots == 0:
-        print("No road test slots are currently available. Sleeping for 5 minutes.")
+        dt = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{dt}] No road test slots are currently available. Sleeping for 30 minutes.")
     else:
         print("OH MY GOD!!! GO! GO! GO!")
 
